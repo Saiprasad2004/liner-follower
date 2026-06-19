@@ -12,24 +12,44 @@
 <script>
 function startListening() {
 
-    alert("Listening...");
-
     var recognition = new webkitSpeechRecognition();
 
     recognition.lang = "en-US";
 
     recognition.onresult = function(event) {
-        var command = event.results[0][0].transcript;
-        alert("You said: " + command);
-        window.location.href = "http://192.168.4.1/forward";
-    };
 
-    recognition.onerror = function(event) {
-        alert("Error: " + event.error);
+        var command =
+        event.results[0][0].transcript.toLowerCase();
+
+        alert("You said: " + command);
+
+        if(command.includes("forward"))
+            window.location.href =
+            "http://192.168.4.1/forward";
+
+        else if(command.includes("back"))
+            window.location.href =
+            "http://192.168.4.1/back";
+
+        else if(command.includes("left"))
+            window.location.href =
+            "http://192.168.4.1/left";
+
+        else if(command.includes("right"))
+            window.location.href =
+            "http://192.168.4.1/right";
+
+        else if(command.includes("stop"))
+            window.location.href =
+            "http://192.168.4.1/stop";
+
+        else
+            alert("Command not recognized");
     };
 
     recognition.start();
 }
+
 </script>
 
 </body>
