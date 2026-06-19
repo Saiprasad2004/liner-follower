@@ -1,35 +1,36 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Voice Car Test</title>
-</head>
-<body>
-
-<h1>Voice Test</h1>
-
-<button onclick="startListening()">Voice Command</button>
-
 <script>
 function startListening() {
-
-    alert("Listening...");
 
     var recognition = new webkitSpeechRecognition();
 
     recognition.lang = "en-US";
 
     recognition.onresult = function(event) {
-        var command = event.results[0][0].transcript;
-        alert("You said: " + command);
-    };
 
-    recognition.onerror = function(event) {
-        alert("Error: " + event.error);
+        var command =
+        event.results[0][0].transcript.toLowerCase();
+
+        if(command.includes("forward"))
+            window.location.href =
+            "http://192.168.4.1/forward";
+
+        else if(command.includes("back"))
+            window.location.href =
+            "http://192.168.4.1/back";
+
+        else if(command.includes("left"))
+            window.location.href =
+            "http://192.168.4.1/left";
+
+        else if(command.includes("right"))
+            window.location.href =
+            "http://192.168.4.1/right";
+
+        else if(command.includes("stop"))
+            window.location.href =
+            "http://192.168.4.1/stop";
     };
 
     recognition.start();
 }
 </script>
-
-</body>
-</html>
